@@ -17,6 +17,15 @@ from django.contrib import admin
 from django.urls import path, include
 from rest_framework import routers
 from .views import UserViewSet, TeamViewSet, ActivityViewSet, LeaderboardViewSet, WorkoutViewSet
+import os
+
+# Configure API root URL based on environment
+CODESPACE_NAME = os.getenv('CODESPACE_NAME')
+if CODESPACE_NAME:
+    API_ROOT_URL = f'https://{CODESPACE_NAME}-8000.app.github.dev/api/'
+else:
+    API_ROOT_URL = 'http://localhost:8000/api/'
+
 router = routers.DefaultRouter()
 router.register(r'users', UserViewSet)
 router.register(r'teams', TeamViewSet)
